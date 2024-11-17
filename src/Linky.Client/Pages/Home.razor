@@ -1,4 +1,5 @@
 ﻿@page "/"
+@using Linky.Client.Models
 
 <RadzenStack Orientation="Orientation.Horizontal" JustifyContent="JustifyContent.Center" AlignItems="AlignItems.Center" class="rz-pt-10">
     <RadzenCard Variant="Variant.Filled" Style="width: 700px" class="rz-px-12">
@@ -11,7 +12,7 @@
             </RadzenText>
 
             <RadzenStack Orientation="Orientation.Horizontal" Gap="0">
-                <RadzenTextBox class="rz-w-100" Placeholder="Enter your link here"/>
+                <RadzenTextBox class="rz-w-100" Placeholder="Enter your link here" MaxLength="2048" @bind-Value="_link.Url"/>
                 <RadzenButton Text="Short link" Style="text-wrap: nowrap; min-width: min-content"></RadzenButton>
             </RadzenStack>
 
@@ -25,7 +26,7 @@
                         <RadzenText>
                             Custom alias:
                         </RadzenText>
-                        <RadzenTextBox Placeholder="Custom alias" MaxLength="22"/>
+                        <RadzenTextBox Placeholder="Custom alias" MaxLength="22" @bind-Value="_link.Alias"/>
                     </RadzenStack>
                 </RadzenColumn>
                 <RadzenColumn>
@@ -33,10 +34,10 @@
                         <RadzenText>
                             Type of link:
                         </RadzenText>
-                        <RadzenSelectBar TValue="int" Size="ButtonSize.Small">
+                        <RadzenSelectBar TValue="LinkType" Size="ButtonSize.Small" @bind-Value="_link.Type">
                             <Items>
-                                <RadzenSelectBarItem Value="1" Text="Redirect" />
-                                <RadzenSelectBarItem Value="2" Text="Serve" />
+                                <RadzenSelectBarItem Value="LinkType.Redirect" Text="Redirect" />
+                                <RadzenSelectBarItem Value="LinkType.Serve" Text="Serve" />
                             </Items>
                         </RadzenSelectBar>
                     </RadzenStack>  
@@ -46,3 +47,13 @@
 
     </RadzenCard>
 </RadzenStack>
+
+@code
+{
+    readonly LinkCreationRequest _link = new()
+    {
+        Url = string.Empty,
+        Alias = string.Empty,
+        Type = LinkType.Redirect
+    };
+}
