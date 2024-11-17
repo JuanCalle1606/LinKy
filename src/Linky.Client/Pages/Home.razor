@@ -1,5 +1,7 @@
 ﻿@page "/"
 @using Linky.Client.Models
+@using Linky.Client.Services
+@inject ILinkManager LinkManager
 
 <RadzenStack Orientation="Orientation.Horizontal" JustifyContent="JustifyContent.Center" AlignItems="AlignItems.Center" class="rz-pt-10">
     <RadzenCard Variant="Variant.Filled" Style="width: 700px" class="rz-px-12">
@@ -13,7 +15,7 @@
 
             <RadzenStack Orientation="Orientation.Horizontal" Gap="0">
                 <RadzenTextBox class="rz-w-100" Placeholder="Enter your link here" MaxLength="2048" @bind-Value="_link.Url"/>
-                <RadzenButton Text="Short link" Style="text-wrap: nowrap; min-width: min-content"></RadzenButton>
+                <RadzenButton Text="Short link" IsBusy="_busy" Click="CreateLink" Style="text-wrap: nowrap; min-width: min-content"></RadzenButton>
             </RadzenStack>
 
             <RadzenText>
@@ -44,16 +46,14 @@
                 </RadzenColumn>
             </RadzenRow>
         </RadzenStack>
-
+        <RadzenAlert AlertStyle="AlertStyle.Danger" AllowClose="false" Visible="@(_error is not null)"  Variant="Variant.Flat" Shade="Shade.Lighter">
+            @_error
+        </RadzenAlert>
+        @if (_shortenedLink is not null)
+        {
+            <RadzenAlert Variant="Variant.Filled" AlertStyle="AlertStyle.Primary" Size="AlertSize.Medium" Shade="Shade.Light" AllowClose=false>
+                    Your shortened link is: <a href="@Link" target="_blank">@Link</a>
+            </RadzenAlert>
+        }
     </RadzenCard>
 </RadzenStack>
-
-@code
-{
-    readonly LinkCreationRequest _link = new()
-    {
-        Url = string.Empty,
-        Alias = string.Empty,
-        Type = LinkType.Redirect
-    };
-}

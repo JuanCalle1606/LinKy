@@ -10,6 +10,11 @@
     <ItemGroup>
         <ProjectReference Include="..\Linky.Client\Linky.Client.csproj"/>
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.8"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.10">
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+            <PrivateAssets>all</PrivateAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.10"/>
     </ItemGroup>
 
     <ItemGroup>

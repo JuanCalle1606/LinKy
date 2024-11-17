@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 public class Link {
 	
-	public UInt128 Uid { get; set; }
+	public uint Uid { get; set; }
 	
 	[MaxLength(2048)]
 	public required string Url { get; set; }

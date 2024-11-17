@@ -1,8 +1,14 @@
 using Linky.Client.Extensions;
 using Linky.Client.Pages;
+using Linky.Client.Services;
 using Linky.Components;
+using Linky.Models;
+using Linky.Services;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+var config = builder.Configuration;
+
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
@@ -11,7 +17,15 @@ builder.Services.AddRazorComponents()
 
 builder.Services.AddSharedServices();
 
+builder.Services.AddDbContext<LinkyDbContext>(options =>
+	options.UseSqlite(config.GetConnectionString("UrlDb")));
+
 builder.Services.AddControllers();
+
+builder.Services.AddScoped<ILinkManager, ServerLinkManager>();
+builder.Services.AddHostedService<DbInit>();
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
 
 var app = builder.Build();
 
