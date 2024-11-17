@@ -1,3 +1,4 @@
+using Linky.Client.Extensions;
 using Linky.Client.Pages;
 using Linky.Components;
 
@@ -7,6 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
 	.AddInteractiveServerComponents()
 	.AddInteractiveWebAssemblyComponents();
+
+builder.Services.AddSharedServices();
 
 var app = builder.Build();
 
