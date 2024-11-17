@@ -1,5 +1,48 @@
 ﻿@page "/"
 
-<h1>Hello, world!</h1>
+<RadzenStack Orientation="Orientation.Horizontal" JustifyContent="JustifyContent.Center" AlignItems="AlignItems.Center" class="rz-pt-10">
+    <RadzenCard Variant="Variant.Filled" Style="width: 700px" class="rz-px-12">
+        <RadzenStack>
+            <RadzenText TextStyle="TextStyle.H3" TextAlign="TextAlign.Center">
+                Welcome to LinKy!
+            </RadzenText>
+            <RadzenText>
+                This is a simple application that allows you to store and share links.
+            </RadzenText>
 
-Welcome to your new app.
+            <RadzenStack Orientation="Orientation.Horizontal" Gap="0">
+                <RadzenTextBox class="rz-w-100" Placeholder="Enter your link here"/>
+                <RadzenButton Text="Short link" Style="text-wrap: nowrap; min-width: min-content"></RadzenButton>
+            </RadzenStack>
+
+            <RadzenText>
+                Extra settings:
+            </RadzenText>
+
+            <RadzenRow>
+                <RadzenColumn>
+                    <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center">
+                        <RadzenText>
+                            Custom alias:
+                        </RadzenText>
+                        <RadzenTextBox Placeholder="Custom alias" MaxLength="22"/>
+                    </RadzenStack>
+                </RadzenColumn>
+                <RadzenColumn>
+                    <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center">
+                        <RadzenText>
+                            Type of link:
+                        </RadzenText>
+                        <RadzenSelectBar TValue="int" Size="ButtonSize.Small">
+                            <Items>
+                                <RadzenSelectBarItem Value="1" Text="Redirect" />
+                                <RadzenSelectBarItem Value="2" Text="Serve" />
+                            </Items>
+                        </RadzenSelectBar>
+                    </RadzenStack>  
+                </RadzenColumn>
+            </RadzenRow>
+        </RadzenStack>
+
+    </RadzenCard>
+</RadzenStack>

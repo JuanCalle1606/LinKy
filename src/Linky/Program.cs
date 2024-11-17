@@ -11,6 +11,8 @@ builder.Services.AddRazorComponents()
 
 builder.Services.AddSharedServices();
 
+builder.Services.AddControllers();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -33,5 +35,7 @@ app.MapRazorComponents<App>()
 	.AddInteractiveServerRenderMode()
 	.AddInteractiveWebAssemblyRenderMode()
 	.AddAdditionalAssemblies(typeof(Linky.Client._Imports).Assembly);
+
+app.MapControllers();
 
 app.Run();
