@@ -1,0 +1,19 @@
+@inject IJSRuntime JsRuntime
+@inject TooltipService TooltipService
+
+<RadzenButton @ref="_copyButton" Size="ButtonSize.Small" Icon="content_copy" Variant="Variant.Text" ButtonStyle="ButtonStyle.Dark" Click="CopyTextToClipboard"/>
+
+@code {
+
+    [Parameter]
+    public string Text { get; set; } = string.Empty;
+
+    RadzenButton _copyButton = null!;
+
+    private async Task CopyTextToClipboard() {
+        await JsRuntime.InvokeVoidAsync("clipboardCopy.copyText", Text);
+        ShowTooltip(_copyButton.Element, new() { Duration = 2000, Position = TooltipPosition.Right });
+    }
+
+    void ShowTooltip(ElementReference elementReference, TooltipOptions? options = null) => TooltipService.Open(elementReference, "Copied!", options);
+}

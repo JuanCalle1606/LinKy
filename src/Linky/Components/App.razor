@@ -17,8 +17,18 @@
 
 <body>
 <Routes @rendermode="InteractiveAuto"/>
+<script>
+    window.clipboardCopy = {
+        copyText: function(text) {
+            navigator.clipboard.writeText(text).then(function () {
+            })
+                .catch(function (error) {
+                    alert(error);
+                });
+        }
+    };
+</script>
 <script src="_framework/blazor.web.js"></script>
 <script src="_content/Radzen.Blazor/Radzen.Blazor.js?v=@(typeof(Colors).Assembly.GetName().Version)"></script>
 </body>
-
 </html>

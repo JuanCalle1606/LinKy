@@ -52,7 +52,7 @@
         @if (_shortenedLink is not null)
         {
             <RadzenAlert Variant="Variant.Filled" AlertStyle="AlertStyle.Primary" Size="AlertSize.Medium" Shade="Shade.Light" AllowClose=false>
-                    Your shortened link is: <a href="@Link" target="_blank">@Link</a>
+                    Your shortened link is: <a href="@Link" style="text-decoration: none" target="_blank">@Link</a> <CopyToClipboard Text="@Link"></CopyToClipboard>
             </RadzenAlert>
         }
     </RadzenCard>
