@@ -1,6 +1,7 @@
 namespace Linky.Client.Models;
 
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 public class Link {
 
@@ -16,5 +17,10 @@ public class Link {
 
 	public HashSet<Alias> Aliases { get; set; } = [];
 
-	public record Alias(string Code);
+	public class Alias(string code) {
+		public string Code { get; init; } = code;
+		
+		[JsonIgnore]
+		public Link Link { get; set; } = null!;
+	}
 }
