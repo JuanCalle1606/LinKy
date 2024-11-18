@@ -9,6 +9,8 @@ public partial class Home {
 	
 	Link? _shortenedLink;
 	
+	string _linkCode = string.Empty;
+	
 	string _baseUrl = string.Empty;
 
 	readonly LinkCreationRequest _link = new()
@@ -18,7 +20,7 @@ public partial class Home {
 		Type = LinkType.Redirect
 	};
 
-	public string Link => _baseUrl + "/" + _shortenedLink?.Code;
+	public string Link => _baseUrl + "/" + _linkCode;
 
 	async Task CreateLink() {
 		_error = null;
@@ -28,6 +30,7 @@ public partial class Home {
 		_baseUrl = response.BaseUrl;
 		if (response.Success) {
 			_shortenedLink = response.Link;
+			_linkCode = string.IsNullOrWhiteSpace(_link.Alias) ? _shortenedLink!.Code : _link.Alias;
 			_error = null;
 		} else {
 			_error = response.Error + " " + response.BaseUrl;

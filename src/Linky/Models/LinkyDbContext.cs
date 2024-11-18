@@ -7,6 +7,7 @@ public class LinkyDbContext(DbContextOptions<LinkyDbContext> options) : DbContex
 
 	public DbSet<Link> Links { get; set; }
 
+	public DbSet<Link.Alias> Aliases { get; set; }
 
 	protected override void OnModelCreating(ModelBuilder modelBuilder) {
 		modelBuilder.Entity<Link>().HasKey(l => l.Uid);
@@ -15,7 +16,11 @@ public class LinkyDbContext(DbContextOptions<LinkyDbContext> options) : DbContex
 			l.Url,
 			l.Type
 		}).IsUnique();
-		
+
+		modelBuilder.Entity<Link.Alias>().HasKey(a => a.Code);
+		modelBuilder.Entity<Link.Alias>().Property(p=>p.Code)
+			.HasMaxLength(22);
+		modelBuilder.Entity<Link.Alias>().Property("LinkUid").IsRequired();
 	}
 
 }
