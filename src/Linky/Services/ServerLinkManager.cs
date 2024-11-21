@@ -6,9 +6,9 @@ using Microsoft.EntityFrameworkCore;
 using Models;
 using SimpleBase;
 
-public class ServerLinkManager(LinkyDbContext db, IHttpContextAccessor context, ILogger<ServerLinkManager> logger) : ILinkManager {
+public class ServerLinkManager(LinkyDbContext db, IHostEnvironment env) : ILinkManager {
 
-	string BaseUrl => context.HttpContext?.Request.Scheme + "://" + context.HttpContext?.Request.Host.Value;
+	string BaseUrl => env.IsDevelopment() ? "http://localhost:5287/" : "https://link.zenless.app/";
 
 	public async Task<LinkCreationResponse> CreateLinkAsync(LinkCreationRequest link) {
 		// parameter checks

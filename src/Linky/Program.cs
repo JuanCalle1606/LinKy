@@ -24,7 +24,6 @@ builder.Services.AddControllers();
 
 builder.Services.AddScoped<ILinkManager, ServerLinkManager>();
 builder.Services.AddHostedService<DbInit>();
-builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddHttpClient();
 
 var app = builder.Build();

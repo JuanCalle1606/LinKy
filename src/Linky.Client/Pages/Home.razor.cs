@@ -20,7 +20,7 @@ public partial class Home {
 		Type = LinkType.Redirect
 	};
 
-	public string Link => _baseUrl + "/" + _linkCode;
+	public string Link => _baseUrl + _linkCode;
 
 	async Task CreateLink() {
 		_error = null;
